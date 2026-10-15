@@ -1,0 +1,7 @@
+[
+  { "region": "Gauteng", "units_live": 1840, "business_type": "self-declared: mixed spaza, taxi, fruit" },
+  { "region": "KwaZulu-Natal", "units_live": 610, "business_type": "self-declared: food and clothing" },
+  { "region": "Western Cape", "units_live": 0, "business_type": "" },
+  { "region": "Limpopo", "units_live": 95, "business_type": "self-declared: taxi" },
+  { "region": "Eastern Cape", "units_live": 420, "business_type": "self-declared: spaza" }
+]

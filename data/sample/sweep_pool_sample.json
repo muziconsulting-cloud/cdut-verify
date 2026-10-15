@@ -1,0 +1,7 @@
+[
+  { "region": "Gauteng", "month": "2026-09", "gross_revenue_cents": 40000000, "cogs_cents": 20000000 },
+  { "region": "KwaZulu-Natal", "month": "2026-09", "gross_revenue_cents": 12000000, "cogs_cents": 6000000 },
+  { "region": "Western Cape", "month": "2026-09", "gross_revenue_cents": 0, "cogs_cents": 0 },
+  { "region": "Limpopo", "month": "2026-09", "gross_revenue_cents": 600000, "cogs_cents": 550000 },
+  { "region": "Eastern Cape", "month": "2026-09", "gross_revenue_cents": 9000000, "cogs_cents": 4200000 }
+]

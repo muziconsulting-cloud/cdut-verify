@@ -1,0 +1,12 @@
+{
+  "velocity": 41,
+  "counter_delta": 3,
+  "leads": [
+    { "lead_id": "L-001", "channel": "hackathon", "region": "Gauteng", "stated_interest": "steady monthly yield", "traffic_score": 42 },
+    { "lead_id": "L-002", "channel": "referral", "region": "KwaZulu-Natal", "stated_interest": "informal economy impact", "traffic_score": 31 },
+    { "lead_id": "L-003", "channel": "paid", "region": "Western Cape", "stated_interest": "high returns fast", "traffic_score": 55 },
+    { "lead_id": "L-004", "channel": "organic", "region": "Limpopo", "stated_interest": "safe place for R10k", "traffic_score": 12 },
+    { "lead_id": "L-005", "channel": "whatsapp", "region": "Eastern Cape", "stated_interest": "own an agent that works for me", "traffic_score": 27 },
+    { "lead_id": "L-006", "channel": "paid", "region": "Gauteng", "stated_interest": "high returns fast", "traffic_score": 48 }
+  ]
+}

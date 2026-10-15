@@ -1,0 +1,7 @@
+{
+  "velocity": 18,
+  "counter_delta": 1,
+  "leads": [
+    { "lead_id": "L-EX1", "channel": "hackathon", "region": "Gauteng", "stated_interest": "monthly income", "traffic_score": 30 }
+  ]
+}

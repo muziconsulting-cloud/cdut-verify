@@ -1,0 +1,26 @@
+---
+description: Project rules for the Conquest Tinkerer marketing-agent pipeline
+globs: ["conquest/**/*.py", "run.py"]
+alwaysApply: true
+---
+
+# Conquest Tinkerer — project rules
+
+- Python ≥ 3.10, standard library first. Third-party imports only for live
+  sponsor calls, always behind a `SAMPLE_MODE` fallback.
+- Every sponsor call must degrade gracefully: no exception may abort a run.
+- The product is the **Conquest Designer** (informal-economy worker agent:
+  R10,000, R83/month for 36 months, buys itself back in year 3). Business type is
+  self-declared free text and is **never** a gate or a validated category.
+- The coupon is swept as **gross revenue − COGS**. That is the only financial
+  check. Do not add microscopic underwriting of the underlying business.
+- No money moves. The `gated_intent` ledger is record-only; status is `gated`,
+  `rejected` or `escalated`, never `settled`.
+- Acquisition copy MUST NOT promise the coupon and MUST NOT use speculative terms
+  (guaranteed, risk-free, get rich, ...). It MUST include the risk disclosure.
+  The Fidelity & Conflict Critic's deterministic rule layer is authoritative.
+- A market whose sweep cannot back the coupon (or that has no live instrument)
+  must be **escalated**, never sold.
+- Bound every loop (revision budget, batch depth). No unbounded debates.
+- Keep the repository light; sample data stays under a few KB.
+- Never commit `.env` or API keys.

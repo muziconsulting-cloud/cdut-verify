@@ -1,0 +1,69 @@
+{
+  "project": "Conquest Tinkerer",
+  "tagline": "The marketing agents for the informal economy's worker agent — selling Conquest Designer without overclaiming.",
+  "track": "Track 1 — Solving Fragmented Intelligence",
+  "track_fallback": "Track 3 — Reasoning Architecture",
+  "team": { "name": "WardByWard", "size": 1 },
+  "product": {
+    "name": "Conquest Designer",
+    "what": "The informal-economy worker agent. A buyer pays R10,000; it deploys that capital into any MaDlamini business (any of ~1,000 informal trades; business type is irrelevant and never a gate).",
+    "returns": "R83/month for 36 months (R10,000 x 10%), then in year 3 it buys itself back and gains autonomy.",
+    "coupon_rule": "The coupon is swept as gross revenue minus COGS. The only financial check is the revenue line and the cost line; there is no microscopic underwriting of the underlying business. The buying decision is about a standardized, investible instrument."
+  },
+  "new_element": "The marketing agent system that drives paying, committing traffic to buy Conquest Designers.",
+  "problem": "Capital reaches the informal economy blind or through predatory marketing. A coupon is only real if it is backed by a business's swept revenue minus COGS, and the data that proves it — the lead stream, the designer register and the sweep pool — is fragmented and the sources disagree.",
+  "target_user": "The Conquest growth operator, who must drive paying, committing buyers at volume without overclaiming.",
+  "decision_supported": "Who to approach, what to say, and whether to sell at all for a given market.",
+  "output": "A compliant, evidence-backed outreach plan; record-only gated_intent rows (buy-Conquest-Designer intents); a per-buyer CAC; and a refusal/escalation ledger.",
+  "agents": [
+    { "name": "Volume Planner", "role": "Orchestrator", "collaborates_with": ["Evidence Reconciler", "Fidelity & Conflict Critic", "Telemetry Auditor"] },
+    { "name": "Evidence Reconciler", "role": "Specialist", "collaborates_with": ["Volume Planner", "World Model"] },
+    { "name": "Outreach Closer", "role": "Specialist (sells Conquest Designer)", "collaborates_with": ["Fidelity & Conflict Critic", "H-MEM"] },
+    { "name": "Fidelity & Conflict Critic", "role": "Evaluator / Risk (hype + sweep-support + conflict)", "collaborates_with": ["Outreach Closer", "Volume Planner"] },
+    { "name": "Telemetry Auditor", "role": "Reporter", "collaborates_with": ["Volume Planner"] }
+  ],
+  "collaboration_mechanisms": ["delegation", "critique", "revision loop", "replan on missing evidence", "shared memory", "branching", "escalation", "fallback"],
+  "sponsor_tech": {
+    "zetaris": "Federates the three disagreeing sources (lead stream, designer register, sweep pool) in place into one virtual view for the evidence step — no data movement, no ETL — and derives coupon coverage (swept revenue minus COGS vs the R83 obligation).",
+    "meterless": "Cognition layer. World Model grounds the three disconnected sources into one canonical, provenance-stamped shared state (content-hash stable IDs, idempotent/resumable JSONL append log); H-MEM provides tiered shared memory across touches; Markovian provides the bounded cadence/decision loop and a projected-vs-actual savings log.",
+    "cursor": "The development environment for the whole build; project rules are committed in .cursor/rules/conquest.mdc (SAMPLE_MODE-first, no secrets, no-hype copy, bounded loops).",
+    "nvidia": "Nemotron via the NIM API powers the reason/draft/critique steps through one injected generator, with a deterministic SAMPLE_MODE fallback."
+  },
+  "metrics": ["reach", "reply", "buy_intent_approved", "conversion_rate", "cac_cents", "refusal_rate", "escalation_rate", "attribution_by_channel_geo"],
+  "runtime": {
+    "sample_mode_default": true,
+    "entrypoint": "python3 run.py",
+    "target_run_seconds": "5-10",
+    "dependencies": ["python>=3.10", "requests (live mode only)"]
+  },
+  "pre_existing_components": [
+    "WardByWard backend (SurrealDB SCHEMAFULL schema, AgentRuntime lifecycle, nextIngulaAccount mint rail) deployed at wardbyward.co.za — declared, not resubmitted.",
+    "The Conquest Designer worker agent and the /conquest surface on wardbyward.co.za — declared pre-existing.",
+    "The pre-window scaffold in this repository (git tag 'pre-window-scaffold'): sponsor adapters, sample data, this metadata, README, .cursor/rules — declared pre-existing."
+  ],
+  "new_element_for_this_submission": [
+    "The marketing agent system that drives paying, committing traffic to buy Conquest Designers.",
+    "Evidence Reconciler and coupon-coverage source-conflict detection.",
+    "Fidelity & Conflict Critic (hype + sweep-support + conflict gates) and the escalation branch.",
+    "Real Zetaris/Meterless/NVIDIA wiring; the audit report; the slide deck and demo video."
+  ],
+  "mission": "Informal-sector economic vitality across the developing world, by channeling honest, agent-mediated capital to real unbanked businesses.",
+  "roadmap_aspirational": [
+    "A containerised NVIDIA-GPU inference super server.",
+    "Self-hosted real-time comms (coturn) over dedicated international backhaul for low-connectivity regions.",
+    "Stated as post-event future work; not part of this build."
+  ],
+  "data": {
+    "type": "synthetic",
+    "location": "data/sample/",
+    "runtime_api_required": true,
+    "fallback_sample_mode": true,
+    "sensitive_data": false
+  },
+  "limitations": [
+    "No real payment clearing or bank settlement is implemented.",
+    "Values are synthetic; nothing here moves money (intents are gated/escalated/record-only).",
+    "No industry classification is performed, by design.",
+    "SAMPLE_MODE is deterministic, not a model-quality benchmark."
+  ]
+}
