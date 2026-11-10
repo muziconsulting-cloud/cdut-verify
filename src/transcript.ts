@@ -31,8 +31,10 @@ import { keyId, readEnv, signCanonical, verifyCanonical } from './sign.ts'
 import type {
   AnyTranscript,
   CompletenessResult,
+  PrerequisiteViolation,
   ProgrammeManifest,
   Proof,
+  TranscriptModuleRow,
   TranscriptV1,
   TranscriptV1Payload,
   TranscriptV2,
@@ -261,19 +263,143 @@ export async function verifyTranscript(
  * @param manifest   the published programme manifest to check it against
  */
 export function verifyCompleteness(
-  _transcript: AnyTranscript,
+  transcript: AnyTranscript,
   manifest: ProgrammeManifest,
 ): CompletenessResult {
-  // TODO: implement against TASK.md. Nothing is provable until then.
-  return {
+  const requiredCredits = manifest.totalCredits
+  const empty: CompletenessResult = {
     provable: false,
     complete: false,
     credits: 0,
-    requiredCredits: manifest.totalCredits,
+    requiredCredits,
     missing: [],
     extra: [],
     prerequisiteViolations: [],
-    reasons: ['completeness verification is not implemented yet (see TASK.md)'],
+    reasons: [],
+  }
+
+  if (!isV2(transcript)) {
+    return {
+      ...empty,
+      reasons: [
+        'a cdut/1 transcript carries no programme manifest, so completeness cannot be proved against it',
+      ],
+    }
+  }
+
+  const payload = transcript.payload as TranscriptV2Payload
+  const reasons: string[] = []
+  const hash = manifestHash(manifest)
+
+  if (payload.programme.id !== manifest.id) {
+    reasons.push(
+      `the transcript is for programme ${payload.programme.id}, not ${manifest.id}`,
+    )
+  }
+  if (payload.programme.version !== manifest.version) {
+    reasons.push(
+      `the transcript commits to programme version ${payload.programme.version}, not ${manifest.version}`,
+    )
+  }
+  if (payload.programme.manifestHash !== hash) {
+    reasons.push(
+      `the transcript commits to manifest hash ${payload.programme.manifestHash}, not ${hash}`,
+    )
+  }
+
+  if (reasons.length > 0) {
+    return { ...empty, reasons }
+  }
+
+  const rows = new Map<string, TranscriptModuleRow>()
+  for (const row of payload.modules ?? []) rows.set(row.moduleId, row)
+
+  const passes = (row: TranscriptModuleRow | undefined): boolean =>
+    row !== undefined && row.mark >= manifest.passMark
+
+  const manifestIds = new Set(manifest.modules.map((module) => module.id))
+  const missing: string[] = []
+  const extra: string[] = []
+  let credits = 0
+
+  for (const module of manifest.modules) {
+    if (passes(rows.get(module.id))) {
+      credits += module.credits
+    } else {
+      missing.push(module.id)
+    }
+  }
+
+  for (const row of payload.modules ?? []) {
+    if (!manifestIds.has(row.moduleId)) extra.push(row.moduleId)
+  }
+
+  const prerequisiteViolations: PrerequisiteViolation[] = []
+  for (const module of manifest.modules) {
+    const row = rows.get(module.id)
+    if (!passes(row)) continue
+    for (const prerequisiteId of module.prerequisites) {
+      const prerequisite = rows.get(prerequisiteId)
+      if (!passes(prerequisite)) {
+        prerequisiteViolations.push({
+          moduleId: module.id,
+          missingPrerequisite: prerequisiteId,
+        })
+      } else if (Date.parse(prerequisite!.passedAt) > Date.parse(row!.passedAt)) {
+        prerequisiteViolations.push({
+          moduleId: module.id,
+          missingPrerequisite: prerequisiteId,
+        })
+      }
+    }
+  }
+
+  missing.sort()
+  extra.sort()
+  prerequisiteViolations.sort((a, b) => {
+    if (a.moduleId !== b.moduleId) return a.moduleId < b.moduleId ? -1 : 1
+    if (a.missingPrerequisite !== b.missingPrerequisite) {
+      return a.missingPrerequisite < b.missingPrerequisite ? -1 : 1
+    }
+    return 0
+  })
+
+  if (credits < requiredCredits) {
+    reasons.push(
+      `the transcript has ${credits} credits but the award requires ${requiredCredits}`,
+    )
+  }
+  if (missing.length > 0) {
+    reasons.push(`missing modules: ${missing.join(', ')}`)
+  }
+  if (prerequisiteViolations.length > 0) {
+    reasons.push(
+      `prerequisite order: ${prerequisiteViolations
+        .map((violation) => `${violation.moduleId} before ${violation.missingPrerequisite}`)
+        .join(', ')}`,
+    )
+  }
+
+  const complete =
+    missing.length === 0 &&
+    credits >= requiredCredits &&
+    prerequisiteViolations.length === 0
+
+  return {
+    provable: true,
+    complete,
+    programme: {
+      id: manifest.id,
+      title: manifest.title,
+      version: manifest.version,
+      nqfLevel: manifest.nqfLevel,
+    },
+    credits,
+    requiredCredits,
+    missing,
+    extra,
+    prerequisiteViolations,
+    reasons,
   }
 }
 

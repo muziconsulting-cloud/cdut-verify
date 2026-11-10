@@ -1,23 +1,22 @@
 # Backlog: from a working verifier to a production one
 
 The baseline works: canonical serialisation, content ids and Ed25519 signatures
-pass 13 tests. Everything below is outstanding. The failing suites are the
-specification; this file is the map, the order and the estimate.
+pass 13 tests. Workstreams A–E are implemented and tested. F and G remain.
 
 Total: **50 hours**, about ten working sessions of five hours.
 
 | # | Workstream | Hours | Test suite | Status |
 |---|---|---|---|---|
-| A | Programme completeness | 10 | `test/completeness.test.ts` | stub |
-| B | Manifest integrity | 8 | `test/manifest.test.ts` | stub |
-| C | Payload integrity | 7 | `test/payload.test.ts` | stub |
-| D | Structured verdicts | 8 | `test/verdict.test.ts` | stub |
-| E | Revocation and key rotation | 10 | `test/revocation.test.ts` | stub |
+| A | Programme completeness | 10 | `test/completeness.test.ts` | done |
+| B | Manifest integrity | 8 | `test/manifest.test.ts` | done |
+| C | Payload integrity | 7 | `test/payload.test.ts` | done |
+| D | Structured verdicts | 8 | `test/verdict.test.ts` | done |
+| E | Revocation and key rotation | 10 | `test/revocation.test.ts` | done |
 | F | CLI batch mode and report schema | 4 | — | not started |
 | G | Adversarial hardening and docs | 3 | — | not started |
 
-Workstreams A–E are anchored by failing tests, so "done" is unambiguous. F and G
-are specified here because they depend on the shape D settles.
+Workstreams A–E are anchored by their test suites, so "done" is unambiguous. F
+and G are specified here because they depend on the shape D settles.
 
 ## A. Programme completeness — 10 hours
 

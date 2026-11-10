@@ -142,9 +142,20 @@ describe('verdict: completeness codes', () => {
   })
 
   test('a credit shortfall reports CREDITS_SHORT', async () => {
-    const demanding: ProgrammeManifest = { ...manifest, totalCredits: 90 }
+    const demanding: ProgrammeManifest = {
+      ...manifest,
+      totalCredits: 90,
+      modules: [
+        ...manifest.modules,
+        { id: 'STAT101', title: 'Statistics I', credits: 15, prerequisites: [] },
+      ],
+    }
     const transcript = await makeTranscript({ against: demanding })
-    const result = await report(transcript)
+    const result = await verifyReport(transcript, {
+      publicKey: keys.publicKey,
+      manifest: demanding,
+    })
+    expect(result.provable).toBe(true)
     expect(result.complete).toBe(false)
     expect(result.codes).toContain('CREDITS_SHORT')
   })
