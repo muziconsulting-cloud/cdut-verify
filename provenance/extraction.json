@@ -1,0 +1,51 @@
+{
+  "slice": "cdut-verify",
+  "declaredBy": "Muzi Dlamini",
+  "declaredAt": "2026-11-10",
+  "source": {
+    "repository": "https://github.com/muziconsulting-cloud/conquest-designer-university",
+    "visibility": "private",
+    "snapshotCommit": "5c01ee5",
+    "snapshotDate": "2026-11-10",
+    "trackedFiles": 1557,
+    "typescriptFiles": 824,
+    "typescriptLines": 84308,
+    "historyNote": "Staged as a snapshot; the Git history is two commits. The earlier public prototype carries 34 commits from 2026-10-26 to 2026-10-27."
+  },
+  "publicPrototype": {
+    "repository": "https://github.com/muziconsulting-cloud/conquest-designer",
+    "visibility": "public",
+    "commits": 34,
+    "firstCommit": "2026-10-26",
+    "lastCommit": "2026-10-27",
+    "licence": "all rights reserved"
+  },
+  "carriedForward": [
+    "the .cdut transcript format",
+    "canonical serialisation and content ids",
+    "Ed25519 signing and verification",
+    "transcript issuing and verification",
+    "the programme manifest model"
+  ],
+  "excluded": [
+    "registrar",
+    "curriculum catalogue",
+    "student records",
+    "internal services",
+    "deployment configuration",
+    "credentials",
+    "sponsor integrations",
+    "private data"
+  ],
+  "independence": {
+    "runtimeDependencies": 0,
+    "importsOutsideSlice": 0,
+    "referencesToPrivateTree": 0,
+    "privateDataInSlice": false
+  },
+  "licenceScope": {
+    "slice": "Apache-2.0",
+    "university": "proprietary, all rights reserved",
+    "appliesTo": "the files in this repository only"
+  }
+}

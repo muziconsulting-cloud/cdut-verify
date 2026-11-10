@@ -1,31 +1,30 @@
 {
-  "name": "conquest-exchange",
+  "name": "cdut-verify",
   "version": "0.1.0",
-  "private": true,
+  "description": "Offline verifier for CDU .cdut transcripts, with programme-manifest completeness checking",
   "type": "module",
   "license": "Apache-2.0",
-  "description": "Conquest — the agent exchange. An exchange where autonomous agents are priced, listed and traded, and a swarm does the listing work.",
-  "engines": {
-    "bun": ">=1.1.0"
+  "author": "Muzi Dlamini",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muziconsulting-cloud/cdut-verify.git"
+  },
+  "homepage": "https://github.com/muziconsulting-cloud/cdut-verify#readme",
+  "keywords": ["transcript", "verification", "ed25519", "education", "cdut"],
+  "bin": {
+    "cdut-verify": "./src/cli.ts"
   },
   "scripts": {
-    "conformance": "bun run scripts/conformance.ts",
-    "engines:fetch": "bun run scripts/fetch-engines.ts",
-    "recon": "bun run scripts/recon.ts",
-    "determinism": "bun run scripts/determinism.ts",
-    "zetaris:selftest": "bun run scripts/zetaris-selftest.ts",
-    "llm:selftest": "bun run scripts/llm-selftest.ts",
-    "avc:selftest": "bun run scripts/avc-selftest.ts",
-    "listing:selftest": "bun run scripts/listing-selftest.ts",
-    "serve": "bun run src/server.ts",
-    "swarm": "bun run src/index.ts",
-    "typecheck": "bunx tsc --noEmit"
+    "verify": "bun src/cli.ts",
+    "test": "bun test",
+    "test:baseline": "bun test test/transcript.test.ts",
+    "test:task": "bun test test/completeness.test.ts test/manifest.test.ts test/payload.test.ts test/verdict.test.ts test/revocation.test.ts",
+    "typecheck": "bun x tsc --noEmit -p ."
   },
   "devDependencies": {
-    "@types/bun": "^1.1.14",
-    "typescript": "^5.6.3"
+    "@types/bun": "latest"
   },
-  "dependencies": {
-    "surrealdb.js": "^1.0.0"
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }

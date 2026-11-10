@@ -1,24 +1,8 @@
-.env
-__pycache__/
-*.pyc
-.venv/
-venv/
 node_modules/
-# Meterless engine specs are degit'd at build time and never vendored into the repo.
-# We implement from AGENTS.md and attribute Apache 2.0 in SPONSORS.md.
-vendor/
-# The traces are the evidence a judge reads — they are committed on purpose.
-!logs/.gitkeep
-# But the numbered traces a gate run writes (the determinism and verify-paths gates
-# each write one) are transient duplicates of the committed evidence — keep them out.
-logs/trace-20261022-0[0-9][0-9].jsonl
+dist/
+.env
+.env.*
+*.key
+*.pem
+*.p12
 .DS_Store
-
-.env
-.env.production
-*.local
-
-.env
-.env.production
-*.local
-.env.bak

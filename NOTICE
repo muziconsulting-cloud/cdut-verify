@@ -1,0 +1,14 @@
+cdut-verify
+Copyright 2026 Muzi Dlamini
+
+This product includes software developed for Conquest Designer University
+(the `.cdut` transcript format and its canonical serialization), released
+here under the Apache License, Version 2.0 by the copyright holder, Muzi
+Dlamini, creator of the `.cdut` specification.
+
+No third-party source code is vendored in this repository. References to
+external standards (NIST, CSEC2017, HEQSF) are citations, not copied text.
+
+Scope: this licence covers the files in this repository only. The Conquest
+Designer University codebase remains proprietary and all rights reserved. See
+PROVENANCE.md for the extraction record.
